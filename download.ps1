@@ -12,7 +12,7 @@ $folder = (Get-Location).Path
 
 $lnk = Join-Path $folder "installer.lnk"
 $txt = Join-Path $folder "installer.txt"
-$log = Join-Path $folder "my_log.txt"
+$log = Join-Path $env:TEMP "my_log222.txt"
 
 Start-Sleep -Seconds 2
 

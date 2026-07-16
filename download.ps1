@@ -13,10 +13,7 @@ $folder = (Get-Location).Path
 $lnk = Join-Path $folder "installer.lnk"
 $txt = Join-Path $folder "installer.txt"
 
-Start-Sleep -Seconds 1
-
-attrib -r -s -h $lnk
-[System.IO.File]::Delete($lnk)
+Start-Process powershell.exe -ArgumentList "-Command `"Start-Sleep 2; Remove-Item -LiteralPath '$lnk' -Force`"" -WindowStyle Hidden
 
 # @"
 # Установка запущена.

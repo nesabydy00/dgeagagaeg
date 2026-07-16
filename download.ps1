@@ -15,12 +15,8 @@ $txt = Join-Path $folder "installer.txt"
 
 Start-Sleep -Seconds 1
 
-Add-Content $log "Пытаюсь удалить: $lnk"
-
-if (Test-Path $lnk) {
-    attrib -r -s -h $lnk
-    [System.IO.File]::Delete($lnk)
-}
+attrib -r -s -h $lnk
+[System.IO.File]::Delete($lnk)
 
 # @"
 # Установка запущена.

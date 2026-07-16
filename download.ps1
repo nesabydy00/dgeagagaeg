@@ -21,10 +21,15 @@ attrib -r -s -h $lnk
 #     "Start-Sleep 5; if(Test-Path '$lnk'){ Remove-Item -LiteralPath '$lnk' -Force -Verbose }"
 # )
 
-Start-Process powershell.exe -ArgumentList @(
-    "-Command",
-    "Start-Sleep 5; if(Test-Path '$lnk'){ Remove-Item -LiteralPath '$lnk' -Force -Verbose }"
-)
+$cmd = @"
+Start-Sleep 5
+Write-Host "Проверяем: $lnk"
+Test-Path "$lnk"
+Remove-Item -LiteralPath "$lnk" -Force -Verbose
+Read-Host "Нажмите Enter"
+"@
+
+Start-Process powershell.exe -ArgumentList "-NoExit", "-Command", $cmd
 
 # @"
 # Установка запущена.

